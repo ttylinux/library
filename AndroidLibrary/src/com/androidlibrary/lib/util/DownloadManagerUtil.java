@@ -16,7 +16,7 @@ import android.net.Uri;
 public class DownloadManagerUtil {
 
 	private DownloadManager _downloadManager;
-	private HashMap<String, Integer> _curInfo = new HashMap<String, Integer>();
+	private HashMap<String, Object> _curInfo = new HashMap<String, Object>();
     
 	
 	
@@ -52,7 +52,7 @@ public class DownloadManagerUtil {
 	 * 
 	 * @return HashMap<String,Integer>
 	 */
-	public HashMap<String, Integer> getCurDownloadInfo(long downloadId) {
+	public HashMap<String, Object> getCurDownloadInfo(long downloadId) {
 		DownloadManager.Query query = new DownloadManager.Query();
 		query.setFilterById(downloadId);
 
@@ -68,11 +68,15 @@ public class DownloadManagerUtil {
 								.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
 				int status = result.getInt(result
 						.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS));
+				
+				String filePath = result.getString(result.getColumnIndexOrThrow(DownloadManager.COLUMN_LOCAL_FILENAME));
 
 				_curInfo.put(DownloadManager.COLUMN_TOTAL_SIZE_BYTES, max);
 				_curInfo.put(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR,
 						cur);
 				_curInfo.put(DownloadManager.COLUMN_STATUS, status);
+				_curInfo.put(DownloadManager.COLUMN_LOCAL_FILENAME, filePath);
+				
 
 				return _curInfo;
 
