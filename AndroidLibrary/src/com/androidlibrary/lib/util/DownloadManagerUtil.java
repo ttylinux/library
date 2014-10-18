@@ -31,10 +31,10 @@ public class DownloadManagerUtil {
 	 *
 	 *@return 返回标识本次下载的一位ID
 	 */
-	public long startDownload(String url)
+	public long startDownload(String url,Uri filePath)
 	{
 		DownloadManager.Request  request = new DownloadManager.Request(Uri.parse(url));
-	//	request.setDestinationUri(filePath);
+		request.setDestinationUri(filePath);
 		return _downloadManager.enqueue(request);
 	}
 	
