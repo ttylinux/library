@@ -16,7 +16,7 @@ import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
 
-public class NetworkSoapUtill {
+public class NetworkSoapUtil {
 
 	private String SERVICE_NAMESPACE;
 	private String SERVICE_URL;
@@ -25,11 +25,12 @@ public class NetworkSoapUtill {
 
 
 
-	public NetworkSoapUtill(String nameSpace, String serviceUrl) {
+	public NetworkSoapUtil(String nameSpace, String serviceUrl) {
 		SERVICE_NAMESPACE = nameSpace;
 		SERVICE_URL = serviceUrl;
         _httpTransportse = new HttpTransportSE(
     			SERVICE_URL);
+        _httpTransportse.debug=true;
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class NetworkSoapUtill {
 	}
 	
 	/**
-	 * demonstrate how to perform a request which use a soap protocol
+	 * demonstrate how to perform a request with a header.
 	 */
 	public String performLogin(String methodName,String resultKey, String userNameKey, String userName, String passwordKey, String password)
 	{
@@ -94,4 +95,39 @@ public class NetworkSoapUtill {
 		return envelope;
 	}
 
+	/**
+	 * http://www.webxml.com.cn/WebServices/WeatherWebService.asmx?op=getWeatherbyCityName
+	 * 
+	 *Demonstrate how to perform a request without a header 
+	 */
+	public String getWeatherByCityName(String theCityNameKey, String theCityName,String methodName,String resultKey)
+	{
+		
+		HttpTransportSE httpTransportse = new HttpTransportSE(
+    			SERVICE_URL);
+        httpTransportse.debug=true;
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+				SoapEnvelope.VER11);
+		envelope.dotNet=true;
+		
+		SoapObject requestSoapObject = new SoapObject(SERVICE_NAMESPACE,methodName);
+		requestSoapObject.addProperty(theCityNameKey, theCityName);
+		envelope.bodyOut = requestSoapObject;
+		
+		try {
+		//	_httpTransportse.call(SERVICE_NAMESPACE + methodName, envelope);
+			httpTransportse.call(SERVICE_NAMESPACE + methodName, envelope);
+			if(envelope.getResponse() != null)
+			{
+				SoapObject resultObject = (SoapObject) envelope.bodyIn;
+				return resultObject.getProperty(resultKey).toString();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
