@@ -1,7 +1,6 @@
 /** 
  * @author LuShuWei E-mail:albertxiaoyu@163.com 
- * @version 创建时间：2014-10-19 下午1:19:30 
- * 类说明 
+ *
  */
 
 package com.androidlibrary.lib.util;

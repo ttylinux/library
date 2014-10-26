@@ -1,6 +1,6 @@
 /*
  *  @author LuShuWei  E-mail:albertxiaoyu@163.com
- *  创建时间 2014-10-17
+ *  2014-10-17
  */
 
 package com.androidlibrary.lib.util;
@@ -24,13 +24,7 @@ public class DownloadManagerUtil {
 		_downloadManager = downloadManager;
 	}
 
-	/**
-	 * 
-	 *@param url 要下载的文件的URL地址
-	 *@param savePath 下载文件的保存位置，是保存在外部存储器的
-	 *
-	 *@return 返回标识本次下载的一位ID
-	 */
+
 	public long startDownload(String url,Uri filePath)
 	{
 		DownloadManager.Request  request = new DownloadManager.Request(Uri.parse(url));
@@ -40,18 +34,7 @@ public class DownloadManagerUtil {
 	
 	
 	
-	/**
-	 *返回一个HashMap,里面包含的数据是，下载文件的大小，当前文件已经下载的大小，当前文件的下载状态。
-	 *使用到的Key，分别是DownloadManager.COLUMN_TOTAL_SIZE_BYTES,DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR
-	 *DownloadManager.COLUMN_STATUS
-	 *
-	 *在下载过程中，每次调用该方法，返回的数据都会是不同的。
-	 *这个可以结合ContentObserver来使用，ContentObserver不断查询DownloadManager所对应的数据库
-	 * 
-	 * @param  downloadId  标识某次下载的唯一ID
-	 * 
-	 * @return HashMap<String,Integer>
-	 */
+
 	public HashMap<String, Object> getCurDownloadInfo(long downloadId) {
 		DownloadManager.Query query = new DownloadManager.Query();
 		query.setFilterById(downloadId);
