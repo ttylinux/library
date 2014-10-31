@@ -1,7 +1,7 @@
 /** 
  * @author LuShuWei E-mail:albertxiaoyu@163.com 
- * @version 创建时间：2014-10-30 下午7:55:13 
- * 类说明 
+ * @version 鍒涘缓鏃堕棿锛�2014-10-30 涓嬪崍7:55:13 
+ * 绫昏鏄� 
  */
 
 package com.androidlibrary.activity;
@@ -25,7 +25,9 @@ public abstract class CommonTabActivity extends TabActivity {
 	@Override
 	protected void onCreate(Bundle state) {
 		super.onCreate(state);
+		setContentView(R.layout.lib_common_tabhost_activity_layout);
 		_tabHost = getTabHost();
+		prepareDatas();
 		addTabSpec();
 	}
 
@@ -51,7 +53,8 @@ public abstract class CommonTabActivity extends TabActivity {
 		
 	}
 
-   protected abstract ArrayList<TabItem> getTabItems();
+  protected abstract void prepareDatas();
+  protected abstract ArrayList<TabItem> getTabItems();
 	protected class TabItem {
 
 		private int _icon_id;
