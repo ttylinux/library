@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.TabHost.OnTabChangeListener;
 
 public abstract class CommonTabActivity extends TabActivity {
 
@@ -29,59 +31,80 @@ public abstract class CommonTabActivity extends TabActivity {
 		_tabHost = getTabHost();
 		prepareDatas();
 		addTabSpec();
+	
 	}
 
 	private void addTabSpec() {
-		
-		
-	      ArrayList<TabItem> items = getTabItems();
-	      for(int i = 0; i < items.size();i++)
-	      {
-	    	  TabItem one = items.get(i);
-	    	  
-	    	  View tabView = LayoutInflater.from(this).inflate(R.layout.tab_item_layout,
-	  				null);
-	    	  ImageView icon = (ImageView)tabView.findViewById(R.id.imageView_tab);
-	    	  icon.setImageResource(one.getIcon());
-	    	  
-	    	  TabHost.TabSpec oneSpec = _tabHost.newTabSpec(one.getTag());
-	    	  oneSpec.setIndicator(tabView);
-	    	  oneSpec.setContent(one.getContent());
-	    	  
-	    	  _tabHost.addTab(oneSpec);
-	      }
-		
-	}
 
-  protected abstract void prepareDatas();
-  protected abstract ArrayList<TabItem> getTabItems();
+		ArrayList<TabItem> items = getTabItems();
+		for (int i = 0; i < items.size(); i++) {
+			TabItem one = items.get(i);
+
+			View tabView = LayoutInflater.from(this).inflate(
+					R.layout.tab_item_layout, null);
+		    TextView tab = (TextView)tabView.findViewById(R.id.tv_tab);
+		    setTabView(tab,i);
+
+			TabHost.TabSpec oneSpec = _tabHost.newTabSpec(one.getTag());
+			oneSpec.setIndicator(tabView);
+			if (one.getRecreateState()) {
+				one.getContent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			}
+			oneSpec.setContent(one.getContent());
+			_tabHost.addTab(oneSpec);
+		}
+
+	}
+	
+
+
+	protected abstract void setTabView(TextView tabView,int position);
+	protected abstract void prepareDatas();
+    
+	protected abstract ArrayList<TabItem> getTabItems();
+
 	protected class TabItem {
 
-		private int _icon_id;
 		private String _tag;
 		private Intent _content;
+		private String _tabName;
+		private int _tabBg;
+		private boolean _isRecreate;
 
-		public TabItem(int icon_id, String tag, Intent content) {
-			_icon_id = icon_id;
+		public TabItem(String tag, Intent content, String tabName) {
 			_tag = tag;
 			_content = content;
+			_tabName = tabName;
+		}
+
+		public void setTabBg(int resdId)
+		{
+			_tabBg = resdId;
 		}
 		
-		public int getIcon()
-		{
-			return _icon_id;
+		public int getTabBg() {
+			return _tabBg;
 		}
-		
-		public String getTag()
-		{
+
+		public String getTabName() {
+			return _tabName;
+		}
+
+		public String getTag() {
 			return _tag;
 		}
-		
-		public Intent getContent()
-		{
+
+		public Intent getContent() {
 			return _content;
 		}
 
+		public void setRecreateState(boolean state) {
+			_isRecreate = state;
+		}
+
+		public boolean getRecreateState() {
+			return _isRecreate;
+		}
 	}
 
 }
