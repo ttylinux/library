@@ -1,7 +1,6 @@
 /*
-*  @author LuShuWei  E-mail:albertxiaoyu@163.com
-*  ´´½¨Ê±¼ä 2014-10-17
-*/
+ * @author LuShuWei E-mail:albertxiaoyu@163.com ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ 2014-10-17
+ */
 
 package com.androidlibrary.lib;
 
@@ -9,6 +8,6 @@ import android.net.Uri;
 
 public class LibConstant {
 
-	public static final Uri DownloadInfoDataBase_ContentUri =Uri.parse("content://downloads/my_downloads");
+  public static final Uri DownloadInfoDataBase_ContentUri = Uri
+      .parse("content://downloads/my_downloads");
 }
-
