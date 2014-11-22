@@ -19,13 +19,13 @@ public class CustomDatePickerDialog {
   private HashMap<Integer, String> dayOfWeekStr = new HashMap<Integer, String>();
   {
 
-    dayOfWeekStr.put(Calendar.SUNDAY, "����");
-    dayOfWeekStr.put(Calendar.MONDAY, "��һ");
-    dayOfWeekStr.put(Calendar.TUESDAY, "�ܶ�");
-    dayOfWeekStr.put(Calendar.WEDNESDAY, "����");
-    dayOfWeekStr.put(Calendar.THURSDAY, "����");
-    dayOfWeekStr.put(Calendar.FRIDAY, "����");
-    dayOfWeekStr.put(Calendar.SATURDAY, "����");
+    dayOfWeekStr.put(Calendar.SUNDAY, "Sunday");
+    dayOfWeekStr.put(Calendar.MONDAY, "Mondy");
+    dayOfWeekStr.put(Calendar.TUESDAY, "Tuesday");
+    dayOfWeekStr.put(Calendar.WEDNESDAY, "Wednesday");
+    dayOfWeekStr.put(Calendar.THURSDAY, "Thursday");
+    dayOfWeekStr.put(Calendar.FRIDAY, "Friday");
+    dayOfWeekStr.put(Calendar.SATURDAY, "Saturday");
 
 
   }
