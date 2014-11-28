@@ -8,24 +8,24 @@ import android.os.Environment;
 
 public class FileUtil {
 
-  private Context _context;
+  private Context context;
 
   public FileUtil(Context context) {
-    _context = context;
+    this.context = context;
   }
 
   /**
    * return an app's internal dir
    */
   public File getAnInternalDir() {
-    return _context.getFilesDir();
+    return context.getFilesDir();
   }
 
   /**
    * return an app's internal cache dir
    */
   public File getACacheInternalDir() {
-    return _context.getCacheDir();
+    return context.getCacheDir();
   }
 
   /**
@@ -104,7 +104,7 @@ public class FileUtil {
       throw new Exception("External Storage is unavailable");
     }
 
-    File file = new File(_context.getExternalFilesDir(dirType), albumName);
+    File file = new File(context.getExternalFilesDir(dirType), albumName);
     if (!(file.exists() && file.isDirectory())) {
       if (!file.mkdirs()) {
         throw new Exception("Directory not created");
@@ -120,7 +120,7 @@ public class FileUtil {
    * 
    */
   public File getAnPrivateCacheExternalStorageDir() {
-    return _context.getExternalCacheDir();
+    return context.getExternalCacheDir();
 
   }
 

@@ -37,7 +37,7 @@ public class CustomDatePickerDialog {
   private View mCustomView;
   private AlertDialog mDialog;
   private DatePicker mDatePicker;
-  private TextView m_tv_selectdate;
+  private TextView mTvSelectdate;
   private DatePicker.OnDateChangedListener mOnDateChangedListener =
       new DatePicker.OnDateChangedListener() {
 
@@ -51,7 +51,7 @@ public class CustomDatePickerDialog {
 
           int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
-          m_tv_selectdate.setText(year + "-" + monthOfYear + "-" + dayOfMonth
+          mTvSelectdate.setText(year + "-" + monthOfYear + "-" + dayOfMonth
               + dayOfWeekStr.get(dayOfWeek));
         }
       };
@@ -76,7 +76,7 @@ public class CustomDatePickerDialog {
   private void initalView() {
     mCustomView = LayoutInflater.from(mContext).inflate(R.layout.lib_custom_datepicker, null);
     mDatePicker = (DatePicker) mCustomView.findViewById(R.id.datepicker);
-    m_tv_selectdate = (TextView) mCustomView.findViewById(R.id.tv_selectdate);
+    mTvSelectdate = (TextView) mCustomView.findViewById(R.id.tv_selectdate);
 
     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
     builder.setView(mCustomView);
@@ -86,7 +86,7 @@ public class CustomDatePickerDialog {
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH);
     int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-    m_tv_selectdate.setText(year + "-" + month + "-" + dayOfMonth
+    mTvSelectdate.setText(year + "-" + month + "-" + dayOfMonth
         + dayOfWeekStr.get(cal.get(Calendar.DAY_OF_WEEK)));
     mDatePicker.init(year, month, dayOfMonth, mOnDateChangedListener);
 

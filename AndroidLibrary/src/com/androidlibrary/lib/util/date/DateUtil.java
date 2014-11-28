@@ -17,39 +17,39 @@ public class DateUtil {
   public static final int Dec = 12;
   public static final int WeekLength = 7;
   public static final int PartCount = 3;
-  public static HashMap<Integer, String> _seasonQ = new HashMap<Integer, String>();
-  public static HashMap<Integer, Integer> _monthDay = new HashMap<Integer, Integer>();
+  public static HashMap<Integer, String> seasonQ = new HashMap<Integer, String>();
+  public static HashMap<Integer, Integer> monthDay = new HashMap<Integer, Integer>();
 
   static {
 
-    _monthDay.put(1, 31);
-    _monthDay.put(2, 28);
-    _monthDay.put(3, 31);
-    _monthDay.put(4, 30);
-    _monthDay.put(5, 31);
-    _monthDay.put(6, 30);
-    _monthDay.put(7, 31);
-    _monthDay.put(8, 31);
-    _monthDay.put(9, 30);
-    _monthDay.put(10, 31);
-    _monthDay.put(11, 30);
-    _monthDay.put(12, 31);
+    monthDay.put(1, 31);
+    monthDay.put(2, 28);
+    monthDay.put(3, 31);
+    monthDay.put(4, 30);
+    monthDay.put(5, 31);
+    monthDay.put(6, 30);
+    monthDay.put(7, 31);
+    monthDay.put(8, 31);
+    monthDay.put(9, 30);
+    monthDay.put(10, 31);
+    monthDay.put(11, 30);
+    monthDay.put(12, 31);
 
-    _seasonQ.put(1, "1");
-    _seasonQ.put(2, "1");
-    _seasonQ.put(3, "1");
+    seasonQ.put(1, "1");
+    seasonQ.put(2, "1");
+    seasonQ.put(3, "1");
 
-    _seasonQ.put(4, "2");
-    _seasonQ.put(5, "2");
-    _seasonQ.put(6, "2");
+    seasonQ.put(4, "2");
+    seasonQ.put(5, "2");
+    seasonQ.put(6, "2");
 
-    _seasonQ.put(7, "3");
-    _seasonQ.put(8, "3");
-    _seasonQ.put(9, "3");
+    seasonQ.put(7, "3");
+    seasonQ.put(8, "3");
+    seasonQ.put(9, "3");
 
-    _seasonQ.put(10, "4");
-    _seasonQ.put(11, "4");
-    _seasonQ.put(12, "4");
+    seasonQ.put(10, "4");
+    seasonQ.put(11, "4");
+    seasonQ.put(12, "4");
   }
 
   /**
@@ -83,11 +83,11 @@ public class DateUtil {
         if (month == Jan) {
           startYear = (year - 1) + "";
           startMonth = Dec + "";
-          startDay = (_monthDay.get(Dec) - (WeekLength - day) + 1) + "";
+          startDay = (monthDay.get(Dec) - (WeekLength - day) + 1) + "";
         } else {
           startYear = year + "";
           startMonth = (month - 1) + "";
-          startDay = (_monthDay.get(Integer.valueOf(startMonth)) - (WeekLength - day) + 1) + "";
+          startDay = (monthDay.get(Integer.valueOf(startMonth)) - (WeekLength - day) + 1) + "";
         }
       }
     }
@@ -119,9 +119,9 @@ public class DateUtil {
 
   public static void setFeb(int year) {
     if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-      _monthDay.put(2, 29);
+      monthDay.put(2, 29);
     } else {
-      _monthDay.put(2, 28);
+      monthDay.put(2, 28);
     }
   }
 
@@ -133,7 +133,7 @@ public class DateUtil {
    * @return quarter
    */
   public static String determineWhichQuarter(int month) {
-    return _seasonQ.get(month);
+    return seasonQ.get(month);
   }
 
 

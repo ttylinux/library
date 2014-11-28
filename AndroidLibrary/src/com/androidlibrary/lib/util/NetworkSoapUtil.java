@@ -19,16 +19,16 @@ public class NetworkSoapUtil {
 
   private String SERVICE_NAMESPACE;
   private String SERVICE_URL;
-  private HttpTransportSE _httpTransportse;
-  private Element _header;
+  private HttpTransportSE httpTransportse;
+  private Element header;
 
 
 
   public NetworkSoapUtil(String nameSpace, String serviceUrl) {
     SERVICE_NAMESPACE = nameSpace;
     SERVICE_URL = serviceUrl;
-    _httpTransportse = new HttpTransportSE(SERVICE_URL);
-    _httpTransportse.debug = true;
+    httpTransportse = new HttpTransportSE(SERVICE_URL);
+    httpTransportse.debug = true;
   }
 
   /**
@@ -44,15 +44,15 @@ public class NetworkSoapUtil {
   public void setAuthHeader(String headerName, String authNameKey, String authName,
       String authPasswordKey, String authPassword) {
 
-    _header = new Element().createElement(SERVICE_NAMESPACE, headerName);
+    header = new Element().createElement(SERVICE_NAMESPACE, headerName);
 
     Element userName = new Element().createElement(SERVICE_NAMESPACE, authNameKey);
     userName.addChild(Node.TEXT, authName);
     Element password = new Element().createElement(SERVICE_NAMESPACE, authPasswordKey);
     password.addChild(Node.TEXT, authPassword);
 
-    _header.addChild(Node.ELEMENT, userName);
-    _header.addChild(Node.ELEMENT, password);
+    header.addChild(Node.ELEMENT, userName);
+    header.addChild(Node.ELEMENT, password);
 
   }
 
@@ -68,7 +68,7 @@ public class NetworkSoapUtil {
     envelope.bodyOut = requestSoapObject;
 
     try {
-      _httpTransportse.call(SERVICE_NAMESPACE + methodName, envelope);
+      httpTransportse.call(SERVICE_NAMESPACE + methodName, envelope);
 
       if (envelope.getResponse() != null) {
         SoapObject resultObject = (SoapObject) envelope.bodyIn;
@@ -86,7 +86,7 @@ public class NetworkSoapUtil {
     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
     envelope.dotNet = true;
     envelope.headerOut = new Element[1];
-    envelope.headerOut[0] = _header;
+    envelope.headerOut[0] = header;
     return envelope;
   }
 

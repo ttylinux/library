@@ -12,20 +12,20 @@ import android.net.Uri;
 
 public class DownloadManagerUtil {
 
-  private DownloadManager _downloadManager;
-  private HashMap<String, Object> _curInfo = new HashMap<String, Object>();
+  private DownloadManager downloadManager;
+  private HashMap<String, Object> curInfo = new HashMap<String, Object>();
 
 
 
   public DownloadManagerUtil(DownloadManager downloadManager) {
-    _downloadManager = downloadManager;
+    this.downloadManager = downloadManager;
   }
 
 
   public long startDownload(String url, Uri filePath) {
     DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
     request.setDestinationUri(filePath);
-    return _downloadManager.enqueue(request);
+    return downloadManager.enqueue(request);
   }
 
 
@@ -34,7 +34,7 @@ public class DownloadManagerUtil {
     DownloadManager.Query query = new DownloadManager.Query();
     query.setFilterById(downloadId);
 
-    Cursor result = _downloadManager.query(query);
+    Cursor result = downloadManager.query(query);
     if (result != null && result.moveToFirst()) {
       try {
 
@@ -48,13 +48,13 @@ public class DownloadManagerUtil {
         String filePath =
             result.getString(result.getColumnIndexOrThrow(DownloadManager.COLUMN_LOCAL_FILENAME));
 
-        _curInfo.put(DownloadManager.COLUMN_TOTAL_SIZE_BYTES, max);
-        _curInfo.put(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR, cur);
-        _curInfo.put(DownloadManager.COLUMN_STATUS, status);
-        _curInfo.put(DownloadManager.COLUMN_LOCAL_FILENAME, filePath);
+        curInfo.put(DownloadManager.COLUMN_TOTAL_SIZE_BYTES, max);
+        curInfo.put(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR, cur);
+        curInfo.put(DownloadManager.COLUMN_STATUS, status);
+        curInfo.put(DownloadManager.COLUMN_LOCAL_FILENAME, filePath);
 
 
-        return _curInfo;
+        return curInfo;
 
       } catch (Exception e) {
         e.printStackTrace();
