@@ -20,14 +20,13 @@ import android.widget.TabHost.OnTabChangeListener;
 
 public abstract class CommonTabActivity extends TabActivity {
 
-  private TabHost _tabHost;
-  private View _tab_view;
+  private TabHost tabHost;
 
   @Override
   protected void onCreate(Bundle state) {
     super.onCreate(state);
     setContentView(R.layout.lib_common_tabhost_activity_layout);
-    _tabHost = getTabHost();
+    tabHost = getTabHost();
     prepareDatas();
     addTabSpec();
 
@@ -43,13 +42,13 @@ public abstract class CommonTabActivity extends TabActivity {
       TextView tab = (TextView) tabView.findViewById(R.id.tv_tab);
       setTabView(tab, i);
 
-      TabHost.TabSpec oneSpec = _tabHost.newTabSpec(one.getTag());
+      TabHost.TabSpec oneSpec = tabHost.newTabSpec(one.getTag());
       oneSpec.setIndicator(tabView);
       if (one.getRecreateState()) {
         one.getContent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       }
       oneSpec.setContent(one.getContent());
-      _tabHost.addTab(oneSpec);
+      tabHost.addTab(oneSpec);
     }
 
   }
@@ -64,44 +63,44 @@ public abstract class CommonTabActivity extends TabActivity {
 
   protected class TabItem {
 
-    private String _tag;
-    private Intent _content;
-    private String _tabName;
-    private int _tabBg;
-    private boolean _isRecreate;
+    private String tag;
+    private Intent content;
+    private String tabName;
+    private int tabBg;
+    private boolean isRecreate;
 
     public TabItem(String tag, Intent content, String tabName) {
-      _tag = tag;
-      _content = content;
-      _tabName = tabName;
+      this.tag = tag;
+      this.content = content;
+      this.tabName = tabName;
     }
 
     public void setTabBg(int resdId) {
-      _tabBg = resdId;
+      tabBg = resdId;
     }
 
     public int getTabBg() {
-      return _tabBg;
+      return tabBg;
     }
 
     public String getTabName() {
-      return _tabName;
+      return tabName;
     }
 
     public String getTag() {
-      return _tag;
+      return tag;
     }
 
     public Intent getContent() {
-      return _content;
+      return content;
     }
 
     public void setRecreateState(boolean state) {
-      _isRecreate = state;
+      isRecreate = state;
     }
 
     public boolean getRecreateState() {
-      return _isRecreate;
+      return isRecreate;
     }
   }
 
