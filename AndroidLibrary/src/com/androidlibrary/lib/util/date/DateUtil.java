@@ -55,13 +55,13 @@ public class DateUtil {
   /**
    * Get the start of the week
    * 
-   * @param endOftheWeek the end of this week.dateFormat is yyyy-mmm-dd
+   * @param currentDate the end of this week.dateFormat is yyyy-mmm-dd
    * @return theStartOftheWeek
    * @throws Exception
    */
-  public static String getStartOfTheWeek(String endOftheWeek) throws Exception {
+  public static String getSevenDayAgo(String currentDate) throws Exception {
 
-    String[] end = parseDateToStrArray(endOftheWeek);
+    String[] end = parseDateToStrArray(currentDate);
     String startYear = "";
     String startMonth = "";
     String startDay = "";
