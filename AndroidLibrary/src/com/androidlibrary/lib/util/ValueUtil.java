@@ -16,20 +16,35 @@ public class ValueUtil {
 
   /**
    * 
-   * 对一个数字进行格式化，只取到该数字小数点后的两位
+   * 对一个数字进行格式化，只取到该数字小数点后的两位--经典四舍五入
    * 
    * @param floatValue 是浮点数
    * 
    */
   public static String getValueWithTwoDigit(String floatValue) {
+	  
     Matcher matcher = Pattern.compile(ValidValuePattern).matcher(floatValue);
     if (matcher.find()) {
-      return matcher.group();
+            BigDecimal b = new BigDecimal(Double.parseDouble(floatValue));
+            double result = b.setScale(2, RoundingMode.HALF_UP).doubleValue();
+            return result + "";
     } else {
       return floatValue;
     }
 
   }
+  
+ public static String getValueWithOneDigit(String floatValue){
+        Matcher matcher = Pattern.compile(patternOne).matcher(floatValue);
+        if (matcher.find()) {
+
+            BigDecimal b = new BigDecimal(Double.parseDouble(floatValue));
+            double result = b.setScale(1, RoundingMode.HALF_UP).doubleValue();
+            return result + "";
+        } else {
+            return floatValue;
+        }
+    }
 
   public static boolean is996Value(String tid) {
     Matcher matcher = Pattern.compile(pattern996).matcher(tid);
